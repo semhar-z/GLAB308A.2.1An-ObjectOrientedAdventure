@@ -43,7 +43,7 @@ class Character {
     static MAX_HEALTH = 100; 
     constructor (name) {
       this.name = name;
-      this.health = 100;
+      this.health = Character.MAX_HEALTH;
       this.inventory = [];
       
     }
@@ -65,9 +65,9 @@ class Character {
 //   robin.companion.companion.type = "Flea";
 //   robin.companion.companion.inventory = ["small hat", "sunglasses"];
 
-// robin.roll();                        
-// robin.companion.roll();            
-// robin.companion.companion.roll();     
+//   robin.roll();                        
+//   robin.companion.roll();            
+//   robin.companion.companion.roll();     
 
 
 //  Part 3: Class Features
@@ -84,9 +84,7 @@ class Adventurer extends Character {
       if (!Adventurer.ROLES.includes(role)) {
         throw new Error(`Invalid role: ${role}. Valid roles are: ${Adventurer.ROLES.join(", ")}`);
     }
-      // Adventurers have specialized roles.
       this.role = role;
-      // Every adventurer starts with a bed and 50 gold coins.
       this.inventory.push("bedroll", "50 gold coins");
       this.skills = [];  
     }
@@ -150,24 +148,25 @@ class Companion extends Character {
 
 
 // Create instances for characters and companions
-// const robin = new Adventurer("Robin", "Warrior");
-// const leo = new Companion("Leo", "Cat");  // Create Leo as a Companion
-// const frank = new Companion("Frank", "Flea"); // Create Frank as a Companion
+// const robin = new Adventurer("Robin", "Warrior"); // after we add the static roles this started to throw error because it is not part of the roles
+const robin = new Adventurer("Robin", "Fighter");
+const leo = new Companion("Leo", "Cat");  // Create Leo as a Companion
+const frank = new Companion("Frank", "Flea"); // Create Frank as a Companion
 
 // Assign Frank's inventory
-// frank.inventory = ["small hat", "sunglasses"];
+frank.inventory = ["small hat", "sunglasses"];
 
 //Example outputs
-// console.log(robin);
-// console.log(leo);
-// console.log(frank);
+console.log(robin);
+console.log(leo);
+console.log(frank);
 
 // Test methods for Robin
-// robin.scout(); 
-// robin.addSkill("Rolldice"); 
+robin.scout(); 
+robin.addSkill("Rolldice"); 
 
 // Test methods for Leo
-// leo.play(robin);          
+leo.play(robin);          
 
 
 
@@ -209,11 +208,34 @@ console.log(foundHealer);
 // Create an additional method, duel(), for the Adventurer class with the following functionality:
 
 /*
-Accept an Adventurer as a parameter.
-Use the roll() functionality to create opposing rolls for each adventurer.
-Subtract 1 from the adventurer with the lower roll.
-Log the results of this “round” of the duel, including the rolls and current health values.
-Repeat this process until one of the two adventurers reaches 50 health.
-Log the winner of the duel: the adventurer still above 50 health.
-
+Accept an Adventurer as a parameter. Use the roll() functionality to create opposing rolls for each adventurer.
+Subtract 1 from the adventurer with the lower roll. Log the results of this “round” of the duel, including the rolls and current health values.
+Repeat this process until one of the two adventurers reaches 50 health. Log the winner of the duel: the adventurer still above 50 health.
 */
+
+
+
+// Part 7: Adventure Forth
+
+// If time allows, create other classes that can interact with your characters; 
+
+class Inventory {
+    constructor() {
+        this.items = [];  // Array to hold items
+    }
+
+    addItem(item) {
+        this.items.push(item);  // Add an item to the inventory
+        console.log(`${item.name} has been added to the inventory.`);
+    }
+
+    listItems() {
+        if (this.items.length > 0) {
+            console.log("Inventory Items:");
+            this.items.forEach(item => console.log(`- ${item.name} (${item.type})`));
+        } else {
+            console.log("Inventory is empty.");
+        }
+    }
+
+}
