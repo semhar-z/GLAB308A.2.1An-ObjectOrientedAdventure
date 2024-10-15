@@ -40,12 +40,15 @@
 // Start with a Character class, which will define generic character entities.
 
 class Character {
+    static MAX_HEALTH = 100; 
     constructor (name) {
       this.name = name;
       this.health = 100;
       this.inventory = [];
+      
     }
-
+   
+   
     roll (mod = 0) {
                 const result = Math.floor(Math.random() * 20) + 1 + mod;
                 console.log(`${this.name} rolled a ${result}.`)
@@ -70,8 +73,17 @@ class Character {
 //  Part 3: Class Features
 
 class Adventurer extends Character {
+
+    static ROLES = ["Fighter", "Healer", "Wizard"];
+
     constructor (name, role) {
       super(name);
+
+
+      // Check if the given role is valid
+      if (!Adventurer.ROLES.includes(role)) {
+        throw new Error(`Invalid role: ${role}. Valid roles are: ${Adventurer.ROLES.join(", ")}`);
+    }
       // Adventurers have specialized roles.
       this.role = role;
       // Every adventurer starts with a bed and 50 gold coins.
@@ -128,3 +140,7 @@ leo.play(robin);
 
 
 // Part 4: Class Uniforms
+// Add a static MAX_HEALTH property to the Character class, equal to 100.
+
+
+// Part 5: Gather your Party
