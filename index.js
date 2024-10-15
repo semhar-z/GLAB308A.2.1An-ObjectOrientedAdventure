@@ -100,9 +100,41 @@ class Adventurer extends Character {
         console.log(`${this.name} learned a new skill: ${skill}`);
     }
 
-  }
+    duel(opponent) {             // Method for dueling another adventurer
+        console.log(`${this.name} challenges ${opponent.name} to a duel!`);
+        
+        while (this.health > 50 && opponent.health > 50) {
+            const myRoll = this.roll();          // Roll for self
+            const opponentRoll = opponent.roll(); // Roll for opponent
 
-  // Companion class extending Character
+            console.log(`${this.name} rolled: ${myRoll}, ${opponent.name} rolled: ${opponentRoll}`);
+
+            if (myRoll > opponentRoll) {
+                opponent.health -= 1;  // Opponent loses 1 health
+                console.log(`${opponent.name} takes damage! Current Health: ${opponent.health}`);
+            } else if (myRoll < opponentRoll) {
+                this.health -= 1;      // Self loses 1 health
+                console.log(`${this.name} takes damage! Current Health: ${this.health}`);
+            } else {
+                console.log("It's a tie! No damage taken.");
+            }
+
+            // Log current health after each round
+            console.log(`Current Health - ${this.name}: ${this.health}, ${opponent.name}: ${opponent.health}`);
+        }
+
+        // Determine and log the winner
+        if (this.health <= 50) {
+            console.log(`${this.name} has fallen in battle! ${opponent.name} wins!`);
+        } else {
+            console.log(`${opponent.name} has fallen in battle! ${this.name} wins!`);
+        }
+    }
+}
+        
+   
+
+    // Companion class extending Character
 class Companion extends Character {
     constructor(name, type) {
         super(name);             
@@ -174,3 +206,14 @@ console.log(foundHealer);
 
 // Part 6: Developing Skills
 
+// Create an additional method, duel(), for the Adventurer class with the following functionality:
+
+/*
+Accept an Adventurer as a parameter.
+Use the roll() functionality to create opposing rolls for each adventurer.
+Subtract 1 from the adventurer with the lower roll.
+Log the results of this “round” of the duel, including the rolls and current health values.
+Repeat this process until one of the two adventurers reaches 50 health.
+Log the winner of the duel: the adventurer still above 50 health.
+
+*/
