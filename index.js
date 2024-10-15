@@ -118,24 +118,24 @@ class Companion extends Character {
 
 
 // Create instances for characters and companions
-const robin = new Adventurer("Robin", "Warrior");
-const leo = new Companion("Leo", "Cat");  // Create Leo as a Companion
-const frank = new Companion("Frank", "Flea"); // Create Frank as a Companion
+// const robin = new Adventurer("Robin", "Warrior");
+// const leo = new Companion("Leo", "Cat");  // Create Leo as a Companion
+// const frank = new Companion("Frank", "Flea"); // Create Frank as a Companion
 
 // Assign Frank's inventory
-frank.inventory = ["small hat", "sunglasses"];
+// frank.inventory = ["small hat", "sunglasses"];
 
-// Example outputs
-console.log(robin);
-console.log(leo);
-console.log(frank);
+//Example outputs
+// console.log(robin);
+// console.log(leo);
+// console.log(frank);
 
 // Test methods for Robin
-robin.scout(); 
-robin.addSkill("Rolldice"); 
+// robin.scout(); 
+// robin.addSkill("Rolldice"); 
 
 // Test methods for Leo
-leo.play(robin);          
+// leo.play(robin);          
 
 
 
@@ -144,3 +144,33 @@ leo.play(robin);
 
 
 // Part 5: Gather your Party
+
+class AdventurerFactory {  
+    constructor (role) {
+      this.role = role;
+      this.adventurers = [];
+    }
+    generate (name) {
+      const newAdventurer = new Adventurer(name, this.role);
+      this.adventurers.push(newAdventurer);
+    }
+    findByIndex (index) {
+      return this.adventurers[index];
+    }
+    findByName (name) {
+      return this.adventurers.find((a) => a.name === name);
+    }
+  }
+  
+  const healers = new AdventurerFactory("Healer");
+   robin = healers.generate("Robin");
+   const semhar = healers.generate("Semhar");
+
+   // Example outputs
+// Find a healer by name
+const foundHealer = healers.findByName("Semhar");
+console.log(foundHealer); 
+
+
+// Part 6: Developing Skills
+
